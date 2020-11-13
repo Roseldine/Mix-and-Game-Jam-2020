@@ -4,7 +4,7 @@ using UnityEngine;
 public class EntityEnemy : MonoBehaviour
 {
     public enum enemyType { none, zombie, boss }
-    public enum enemySprot { none, basketball, football, baseball}
+    public enum enemySport { none, basketball, football, baseball}
 
 
     [Header("Enemy Type")]

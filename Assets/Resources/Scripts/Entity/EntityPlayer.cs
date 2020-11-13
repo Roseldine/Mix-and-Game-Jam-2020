@@ -18,6 +18,7 @@ public class EntityPlayer : Entity
     // Update is called once per frame
     void Update()
     {
+        Gravity();
         PlayerMovement();
     }
 
@@ -47,6 +48,10 @@ public class EntityPlayer : Entity
                 SmoothLookAt(_graphicContainer, _rigidbody.velocity, _lookSpeed);
             else
                 SmoothLookAt(_graphicContainer, _cameraPivotX.rotation, _lookSpeed);
+
+
+            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded == true)
+                _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 }
