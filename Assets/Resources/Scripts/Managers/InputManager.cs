@@ -18,7 +18,8 @@ public class InputManager : MonoBehaviour
     public float _xRotation = 0f;
     public Vector2 _rotationClamp;
     public Transform _cameraPivot;
-    public bool _lockCursor;
+    [Tooltip("Z - lock, X - unlock")]
+    public bool _lockCursor = false;
 
     [Header("Has Input")]
     public bool _hasMovementInput;
@@ -82,6 +83,11 @@ public class InputManager : MonoBehaviour
         }
 
         _hasAimInput = Input.GetMouseButton(0);
+
+        if (Input.GetKeyDown(KeyCode.Z))
+            ChangeCursorLock(true);
+        if (Input.GetKeyDown(KeyCode.X))
+            ChangeCursorLock(false);
     }
 
     public void ChangeCursorLock(bool val)
@@ -89,6 +95,6 @@ public class InputManager : MonoBehaviour
         if (val == true)
             Cursor.lockState = CursorLockMode.Locked;
         else
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
     }
 }
