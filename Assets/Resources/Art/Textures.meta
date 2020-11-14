@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Plugins/Thirdparty/Gridbox Prototype Materials.meta
+guid: 27efac07c4a30704f82c82816a853973
+=======
 guid: 79d030ce45edd524293324fbfd198f6e
+>>>>>>> origin/André:Assets/Resources/Art/Textures.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

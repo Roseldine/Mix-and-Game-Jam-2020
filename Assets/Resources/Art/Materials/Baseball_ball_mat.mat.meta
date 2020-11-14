@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/MAPA.unitypackage.meta
+guid: d20763d62d411b442a016aa72c948c5b
+DefaultImporter:
+=======
 guid: 0a79f0b5ed19a864893f5336a6511ec6
 NativeFormatImporter:
+>>>>>>> origin/André:Assets/Resources/Art/Materials/Baseball_ball_mat.mat.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 
