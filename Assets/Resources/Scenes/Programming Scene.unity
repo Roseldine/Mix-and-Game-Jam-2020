@@ -128,7 +128,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2320153452272401336}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 60461271}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 863699390bb724d4c9c03927957816f1, type: 3}
@@ -140,7 +140,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2320153452272401336}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 60461271}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c639686409eaa944c8db791f71d9fca9, type: 3}
@@ -239,6 +239,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13663082}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &60461271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2320153452346998468, guid: 23192356b9057d541b2ba38aebc98c2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2320153452272401336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &60461276
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60461271}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1b43cdb762a2744691533d718d30b71, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &86498243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1226,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 799.99994, y: 500.38022}
+  m_SizeDelta: {x: 800, y: 1660.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1438065017
 MonoBehaviour:
@@ -1221,11 +1246,11 @@ MonoBehaviour:
   _percent: 1
   _clamp: 0
   _minValues: {x: 0, y: 0}
-  _maxValues: {x: 799.99994, y: 500.38022}
-  _initSize: {x: 799.99994, y: 500.38022}
-  _targetWidth: 799.99994
-  _targetHeight: 500.38022
-  _targetSize: {x: 799.99994, y: 500.38022}
+  _maxValues: {x: 800, y: 1660.97}
+  _initSize: {x: 800, y: 1660.97}
+  _targetWidth: 800
+  _targetHeight: 1660.97
+  _targetSize: {x: 800, y: 1660.97}
   _percentWidth: 1
   _percentHeight: 1
 --- !u!1 &1486943786
@@ -2146,6 +2171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _sportShootCooldowns.Array.data[2]
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320153452346998329, guid: 23192356b9057d541b2ba38aebc98c2e,
+        type: 3}
+      propertyPath: _isShooting
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2320153452346998468, guid: 23192356b9057d541b2ba38aebc98c2e,
         type: 3}

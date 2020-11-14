@@ -11,11 +11,12 @@ public class EntityPlayer : Entity
     [Header("Player Sport Shoot Cooldowns")]
     [Tooltip("0-basket, 1-football, 2-baseball")]
     public float[] _sportShootCooldowns;
+    Animator animator;
 
     // Use this for initialization
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -56,18 +57,29 @@ public class EntityPlayer : Entity
 
 
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded == true)
-                _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            { _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
-
+                animator.SetBool("isJumpStart", true);
+            }
+            else
+                animator.SetBool("isJumpStart", false);
             if (_isGrounded == false)
-                PlayAnimation(3);
 
-            else if (InputManager.Instance._hasAimInput == false && _isShooting == false && _isGrounded)
+                animator.SetBool("isFalling", true);
+            else
+            {
+
+
+                animator.SetBool("isFalling", false);
+            }
+
+            
+            if (InputManager.Instance._hasAimInput == false && _isShooting == false && _isGrounded)
             {
                 if (InputManager.Instance._hasMovementInput)
-                    PlayAnimation(1);
+                    animator.SetBool("isRunning", true);
                 else
-                    PlayAnimation(0);
+                    animator.SetBool("isRunning", false);
             }
         }
     }
