@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class EntityAnimationEvent : MonoBehaviour
 {
-
     public Entity _entity;
-
-    private void Start()
-    {
-        
-    }
 
     public void Shoot(int id)
     {
@@ -22,8 +16,4 @@ public class EntityAnimationEvent : MonoBehaviour
     {
         _entity._isShooting = false;
     }
-
-
-   
-
 }
