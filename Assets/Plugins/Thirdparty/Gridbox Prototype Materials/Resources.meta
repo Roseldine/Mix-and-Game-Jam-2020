@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 <<<<<<< HEAD:Assets/Plugins/Thirdparty/Gridbox Prototype Materials/Resources.meta
 guid: 8d1c710911d4cd54c940b4db8ea99a02
-=======
-guid: 554d3b190f5c3db48b2da18c00995529
->>>>>>> origin/André:Assets/Resources/Art/Materials.meta
 folderAsset: yes
 DefaultImporter:
+=======
+guid: b26e50235f2d9df4e967349b0f27dd44
+NativeFormatImporter:
+>>>>>>> André:Assets/Resources/Art/Materials/Basket_ball.mat.meta
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

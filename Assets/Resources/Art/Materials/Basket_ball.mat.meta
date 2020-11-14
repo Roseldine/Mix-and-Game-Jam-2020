@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Cube.prefab.meta
-guid: 4ba0323c0def6104e952c411e02d85a0
-PrefabImporter:
+<<<<<<< HEAD:Assets/Plugins/Thirdparty/Gridbox Prototype Materials/Resources.meta
+guid: 43a066e7b1f197a458330006c14ff131
+folderAsset: yes
+DefaultImporter:
 =======
 guid: b26e50235f2d9df4e967349b0f27dd44
 NativeFormatImporter:
->>>>>>> origin/André:Assets/Resources/Art/Materials/Basket_ball.mat.meta
+>>>>>>> André:Assets/Resources/Art/Materials/Basket_ball.mat.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

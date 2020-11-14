@@ -18,7 +18,6 @@ public class Entity : MonoBehaviour
     public float _groudDetectorRadius = .1f;
     public float _gravitySmoothTime = .75f;
     public float _gravityForce = 100f;
-    //public AnimationCurve _jumpCurve;
     public AnimationCurve _gravityCurve;
     public bool _isGrounded;
     float _time;
@@ -26,6 +25,11 @@ public class Entity : MonoBehaviour
     [Header("Components")]
     public Rigidbody _rigidbody;
     public Transform _groundDetector;
+    public Transform _graphicContainer;
+
+    [Header("Camera Dependencies")]
+    public Transform _cameraPivotX;
+    public Transform _cameraPivotY;
 
     private void Update()
     {
@@ -80,6 +84,8 @@ public class Entity : MonoBehaviour
             _rigidbody.AddForce(Vector3.down * _gravityForce * _gravityCurve.Evaluate(_time / _gravitySmoothTime));
         }
     }
+
+
 
     private protected void OnDrawGizmos()
     {

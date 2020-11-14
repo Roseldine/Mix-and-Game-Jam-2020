@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Basket_ball
-    second: {fileID: 2100000, guid: b26e50235f2d9df4e967349b0f27dd44, type: 2}
+    second: {fileID: 2100000, guid: 43a066e7b1f197a458330006c14ff131, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

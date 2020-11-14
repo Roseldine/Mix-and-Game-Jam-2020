@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class EntityPlayer : Entity
 {
-    [Header("Player Dependencies")]
-    public Transform _graphicContainer;
-    public Transform _cameraPivotX;
-    public Transform _cameraPivotY;
+    [Header("Sport Collisions")]
+    public LayerMask _mask;
+    public Transform _colliderPos;
+    public float _collisionRadius;
+
 
     // Use this for initialization
     void Start()
@@ -19,6 +20,7 @@ public class EntityPlayer : Entity
     {
         Gravity();
         PlayerMovement();
+        PlayerSportCollisions();
     }
 
 
@@ -51,6 +53,16 @@ public class EntityPlayer : Entity
 
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded == true)
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    public void PlayerSportCollisions()
+    {
+        var _colliders = Physics.OverlapSphere(_colliderPos.position, _collisionRadius);
+
+        if (_colliders != null && _colliders.Length > 0)
+        {
+
         }
     }
 }
