@@ -3,12 +3,8 @@ using UnityEngine;
 
 public class EntityEnemy : MonoBehaviour
 {
-    public enum enemyType { none, zombie, boss }
-    public enum enemySport { none, basketball, football, baseball}
-
-
     [Header("Enemy Type")]
-    public enemyType _enemyType;
+    public IEntity.enemyType _enemyType;
 
     // Use this for initialization
     void Start()
