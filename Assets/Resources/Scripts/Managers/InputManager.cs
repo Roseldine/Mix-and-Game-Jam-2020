@@ -26,6 +26,14 @@ public class InputManager : MonoBehaviour
     public bool _hasMouseInput;
     public bool _hasAimInput;
 
+    [Header("Camera Raycast")]
+    public LayerMask _rayMask;
+    public Camera _camera;
+    public Transform _camTransform;
+    public Transform _hitPreviewTransform;
+    public float _rayLength;
+    public Vector3 _cameraRayHitPoint;
+
     private void Start()
     {
         ChangeCursorLock(_lockCursor);
@@ -36,6 +44,7 @@ public class InputManager : MonoBehaviour
     {
         UserMovementInput();
         UserMouseLookInput();
+        CameraRaycast();
     }
 
 
@@ -96,5 +105,16 @@ public class InputManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         else
             Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void CameraRaycast()
+    {
+        RaycastHit _hit;
+
+        if (Physics.Raycast(_camTransform.position, _camTransform.forward, out _hit, _rayLength, _rayMask))
+        {
+            _cameraRayHitPoint = _hit.point;
+            _hitPreviewTransform.position = _cameraRayHitPoint;
+        }
     }
 }

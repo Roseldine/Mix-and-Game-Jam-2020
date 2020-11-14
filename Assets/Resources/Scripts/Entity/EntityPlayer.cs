@@ -8,7 +8,6 @@ public class EntityPlayer : Entity
     public Transform _cameraPivotX;
     public Transform _cameraPivotY;
 
-
     // Use this for initialization
     void Start()
     {
@@ -26,7 +25,7 @@ public class EntityPlayer : Entity
 
     public void PlayerMovement()
     {
-        if (_entityType == entityType.player)
+        if (_entityType == IEntity.entityType.player)
         {
             if (InputManager.Instance._hasMouseInput)
             {

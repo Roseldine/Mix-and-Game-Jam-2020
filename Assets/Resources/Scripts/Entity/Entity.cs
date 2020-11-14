@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public enum entityType { none, player, enemy }
-
     [Header("Entity Type")]
     public int _entityId;
-    public entityType _entityType;
+    public IEntity.entityType _entityType;
+    public IEntity.entitySport _entitySport;
 
     [Header("Entity Movement")]
     public float _moveSpeed = 5;
