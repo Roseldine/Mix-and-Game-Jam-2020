@@ -1056,12 +1056,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282210129}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1377663097 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 780866271, guid: 23192356b9057d541b2ba38aebc98c2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2320153452272401336}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1379284358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2320153453581667902, guid: 23192356b9057d541b2ba38aebc98c2e,
@@ -1830,94 +1824,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _ballPrefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _maxHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _cooldown
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _ballPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 4379289090495741077, guid: 062199199fb5f6b4b852503a4d28785c,
-        type: 3}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _ballPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 4379289090495741077, guid: 89bcf145ca16d40428a0dcbfd817bfcf,
-        type: 3}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _ballPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 4379289090495741077, guid: d48b766047a056f47a2a35c3fc69e290,
-        type: 3}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _batForce
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _maxBaseballHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _baseballBatForce
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 77481342, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: _baseballLineLength
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1996197070, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime0
-      value: 9830
-      objectReference: {fileID: 0}
-    - target: {fileID: 1996197070, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime1
-      value: 42598
-      objectReference: {fileID: 0}
-    - target: {fileID: 1996197070, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1996197070, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153452198359455, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153452288743854, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera Pivot Y
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153452346998329, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: _entitySport
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153452346998329, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: _groundDetector
-      value: 
-      objectReference: {fileID: 1377663097}
     - target: {fileID: 2320153452346998468, guid: 23192356b9057d541b2ba38aebc98c2e,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153452346998468, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2320153452346998469, guid: 23192356b9057d541b2ba38aebc98c2e,
         type: 3}
@@ -1973,21 +1883,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153453448333781, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153453514493127, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320153453581667901, guid: 23192356b9057d541b2ba38aebc98c2e,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera Pivot X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23192356b9057d541b2ba38aebc98c2e, type: 3}
