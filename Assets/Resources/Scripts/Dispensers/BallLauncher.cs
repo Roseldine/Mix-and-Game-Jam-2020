@@ -111,8 +111,8 @@ public class BallLauncher : MonoBehaviour
 	LaunchData CalculateLaunchData(Rigidbody rb, float height)
 	{
 		float displacementY = _target.position.y - rb.position.y;
-		Vector3 displacementXZ = new Vector3 (_target.position.x - rb.position.x, 0, _target.position.z - rb.position.z);
-		float time = Mathf.Sqrt(-2 * height / _baseballBatForce) + Mathf.Sqrt(2 * (displacementY - height) / _baseballBatForce);
+		Vector3 displacementXZ = new Vector3(_target.position.x - rb.position.x, 0, _target.position.z - rb.position.z);
+		float time = Mathf.Sqrt(-2 * height / _gravity) + Mathf.Sqrt(2 * (displacementY - height) / _gravity);
 		Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity * height);
 		Vector3 velocityXZ = displacementXZ / time;
 
