@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-public class EntityEnemy : MonoBehaviour
+public class EntityEnemy : Entity
 {
     [Header("Enemy Type")]
     public IEntity.enemyType _enemyType;

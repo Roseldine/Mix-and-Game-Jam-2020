@@ -57,7 +57,11 @@ public class EntityPlayer : Entity
 
 
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded == true)
+<<<<<<< HEAD
             { _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+=======
+                PlayerJump();
+>>>>>>> main
 
                 animator.SetBool("isJumpStart", true);
             }
@@ -82,6 +86,12 @@ public class EntityPlayer : Entity
                     animator.SetBool("isRunning", false);
             }
         }
+    }
+
+
+    void PlayerJump()
+    {
+        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
 
