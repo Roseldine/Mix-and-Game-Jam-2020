@@ -13,7 +13,7 @@ public class BallLauncher : MonoBehaviour
 	[Header("Basket Definitions")]
 	[Range(0, 2)] public float _cooldown = .2f;
 	[Range(0, 2)] public float _heightMultiplier = .75f;
-	[Range(0, 10)] public float _maxBasketHeight = 10f;
+	[Range(0, 30)] public float _maxBasketHeight = 10f;
 	public float _gravity = -25f;
 	public float _basketHeight = 10f;
 
@@ -26,7 +26,6 @@ public class BallLauncher : MonoBehaviour
 	public float _baseballBatForce = 30f;
 
 	[Header("Booleans")]
-	public bool _canShoot = true;
 	public bool _hasBall = true;
 
 	[Header("Path")]
@@ -42,7 +41,6 @@ public class BallLauncher : MonoBehaviour
 
 	void ResetBools()
     {
-		_canShoot = true;
 		_hasBall = true;
 	}
 	#endregion // initialization
@@ -50,50 +48,39 @@ public class BallLauncher : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetMouseButtonUp(0) && _canShoot && _hasBall)
-			Shoot();
-
 		DrawPath(_spawnPos.GetComponent<Rigidbody>());
 	}
 
 
 	#region Shoot
-	void Shoot()
+	public void Shoot()
 	{
-		if (_canShoot == true)
-        {
-			_target = InputManager.Instance._hitPreviewTransform;			
+		_target = InputManager.Instance._hitPreviewTransform;
 
-			if (_entity._entitySport == IEntity.entitySport.basketball)
-			{
-				var _ball = Instantiate(_ballPrefabs[0], _spawnPos.position, Quaternion.identity).GetComponent<Rigidbody>();
-				Launch(_ball, _basketHeight);
-			}
-
-			else if (_entity._entitySport == IEntity.entitySport.football)
-			{
-				var _ball = Instantiate(_ballPrefabs[1], _spawnPos.position, Quaternion.identity).GetComponent<Rigidbody>();
-				var _dir = (_line.GetPosition(1) - _line.GetPosition(0)).normalized * _footballKickForce;
-				_ball.AddForce(_dir, ForceMode.Impulse);
-			}
-
-			else if (_entity._entitySport == IEntity.entitySport.baseball)
-            {
-				var _ball = Instantiate(_ballPrefabs[2], _spawnPos.position, Quaternion.identity).GetComponent<Rigidbody>();
-				var _dir = (_line.GetPosition(1) - _line.GetPosition(0)).normalized * _baseballBatForce;
-				_ball.AddForce(_dir, ForceMode.Impulse);
-			}
-
-			StartCoroutine(ShootCooldown());
+		if (_entity._entitySport == IEntity.entitySport.basketball)
+		{
+			var _ball = Instantiate(_ballPrefabs[0], _spawnPos.position, Quaternion.identity).GetComponent<Rigidbody>();
+			Launch(_ball, _basketHeight);
 		}
-	}
 
-	IEnumerator ShootCooldown()
-	{
-		_canShoot = false;
+		else if (_entity._entitySport == IEntity.entitySport.football)
+		{
+			var _ball = Instantiate(_ballPrefabs[1], _spawnPos.position, Quaternion.identity).GetComponent<Rigidbody>();
+			var _dir = (_line.GetPosition(1) - _line.GetPosition(0)).normalized * _footballKickForce;
+			_ball.AddForce(_dir, ForceMode.Impulse);
+		}
 
-		yield return new WaitForSeconds(_cooldown);
-		_canShoot = true;
+		else if (_entity._entitySport == IEntity.entitySport.baseball)
+		{
+			var _ball = Instantiate(_ballPrefabs[2], _spawnPos.position, Quaternion.identity).GetComponent<Rigidbody>();
+			var _dir = (_line.GetPosition(1) - _line.GetPosition(0)).normalized * _baseballBatForce;
+			_ball.AddForce(_dir, ForceMode.Impulse);
+		}
+
+		if (_entity._isShooting == false)
+        {
+			
+		}
 	}
 	#endregion // shoot
 

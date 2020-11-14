@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -12,6 +13,7 @@ public class Entity : MonoBehaviour
     public float _moveSpeed = 5;
     public float _lookSpeed = 10;
     public float _jumpForce = 20f;
+    public float _shootCooldown = 1f;
 
     [Header("Gravity")]
     public LayerMask _detectionMask;
@@ -24,8 +26,25 @@ public class Entity : MonoBehaviour
 
     [Header("Components")]
     public Rigidbody _rigidbody;
+    public BallLauncher _ballLauncher;
     public Transform _groundDetector;
     public Transform _graphicContainer;
+
+    [Header("Graphic Animator")]
+    public Transform _graphic;
+    public Animator _animator;
+    public string _graphicTag;
+
+    [Header("Animator States")]
+    public float _crossFadeDuration = .25f;
+
+    [Tooltip("0-idle, 1-run, 2-jump start, 3-falling, 4-death, 5-basket, 6-footbal, 7-baseball")]
+    public string[] _animatorStates;
+    [Tooltip("0-idle, 1-run, 2-jump start, 3-falling, 4-death, 5-basket, 6-footbal, 7-baseball")]
+    public string[] _animatorBools;
+    [Tooltip("0-basket, 1-footbal, 2-baseball")]
+    public float[] _shootAnimDuration;
+    public bool _isShooting;
 
     [Header("Camera Dependencies")]
     public Transform _cameraPivotX;
@@ -56,7 +75,6 @@ public class Entity : MonoBehaviour
     {
         rotator.rotation = Quaternion.Slerp(rotator.rotation, rotation, speed * Time.deltaTime);
     }
-
 
     public void Gravity()
     {
@@ -95,5 +113,53 @@ public class Entity : MonoBehaviour
             Gizmos.DrawWireSphere(_groundDetector.position, _groudDetectorRadius);
         }
     }
+    #endregion
+
+
+    #region Animation
+
+    /// <summary>
+    /// 0-idle, 1-run, 2-jump start, 3-falling, 4-death, 5-basket, 6-footbal, 7-baseball
+    /// </summary>
+    public void PlayAnimation(int id)
+    {
+        if (_animator.GetBool(_animatorBools[id]) == false)
+        {
+            for (int i = 0; i < _animatorBools.Length; i++)
+                _animator.SetBool(_animatorBools[i], false);
+
+            _animator.SetBool(_animatorBools[id], true);
+            _animator.CrossFade(_animatorStates[id], _crossFadeDuration);
+        }
+    }
+
+
+    /// <summary>
+    /// 5-basket, 6-footbal, 7-baseball
+    /// </summary>
+    public void PlayShootAnimation(int id)
+    {
+        PlayAnimation(id + 5);
+        StartCoroutine(ShootCooldown());
+    }
+
+    protected IEnumerator ShootCooldown()
+    {
+        _isShooting = true;
+
+        yield return new WaitForSeconds(_shootCooldown);
+        _isShooting = false;
+    }
+
+    protected IEnumerator ShootCooldown(float cooldown)
+    {
+        _isShooting = true;
+
+        yield return new WaitForSeconds(cooldown);
+        _isShooting = false;
+    }
+
+
+
     #endregion
 }
