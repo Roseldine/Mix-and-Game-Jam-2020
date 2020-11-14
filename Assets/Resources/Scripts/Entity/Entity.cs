@@ -31,13 +31,13 @@ public class Entity : MonoBehaviour
     public Transform _graphicContainer;
 
     [Header("Graphic Animator")]
+    public GameObject[] _sportGear;
     public Transform _graphic;
     public Animator _animator;
-    public string _graphicTag;
+    public string _graphicTag = "Graphic";
 
     [Header("Animator States")]
     public float _crossFadeDuration = .25f;
-
     [Tooltip("0-idle, 1-run, 2-jump start, 3-falling, 4-death, 5-basket, 6-footbal, 7-baseball")]
     public string[] _animatorStates;
     [Tooltip("0-idle, 1-run, 2-jump start, 3-falling, 4-death, 5-basket, 6-footbal, 7-baseball")]
@@ -59,6 +59,21 @@ public class Entity : MonoBehaviour
     public virtual void UpdateEntity()
     {
         Gravity();
+    }
+
+
+    /// <summary>
+    /// 0-none, 1-basket, 2-football, 3-baseball
+    /// </summary>
+    public void SetSport(int id)
+    {
+        _entitySport = (IEntity.entitySport)id;
+
+        for (int i = 0; i < _sportGear.Length; i++)
+            _sportGear[i].SetActive(false);
+
+        if (id > 0)
+            _sportGear[id].SetActive(false);
     }
 
 

@@ -17,16 +17,16 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3088496008439558948}
-    m_Position: {x: 300, y: 440, z: 0}
+    m_Position: {x: 550, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1391860813408649188}
-    m_Position: {x: 30, y: 440, z: 0}
+    m_Position: {x: -230, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 547213363733178088}
     m_Position: {x: 30, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4797544161417692279}
-    m_Position: {x: 30, y: 360, z: 0}
+    m_Position: {x: -230, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5203224345317206339}
     m_Position: {x: 30, y: 280, z: 0}
@@ -35,7 +35,7 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6821661185626488100}
-    m_Position: {x: 30, y: 520, z: 0}
+    m_Position: {x: 30, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4093529542791586110}
     m_Position: {x: 300, y: 280, z: 0}
@@ -98,7 +98,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -9070578397753738753, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: jump
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -125,7 +125,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -5841992650792343576, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: shoot
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -152,7 +152,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7049579401280826596, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: shoot
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -244,12 +244,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isDead
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: isBasket
     m_Type: 4
     m_DefaultFloat: 0
@@ -263,6 +257,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: isBaseball
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -303,7 +303,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -5252816984213320552, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -330,7 +330,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8698526773485126825, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: jump
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -357,7 +357,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 6200578666267062213, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -383,7 +383,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 959575026824534138, guid: 8798f3bde2c3bda42842dfcf2983c76d, type: 3}
-  m_Tag: 
+  m_Tag: movement
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -410,7 +410,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -3829408435491457971, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
-  m_Tag: 
+  m_Tag: shoot
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

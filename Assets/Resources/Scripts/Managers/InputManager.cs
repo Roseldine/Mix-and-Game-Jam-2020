@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     public bool _hasMovementInput;
     public bool _hasMouseInput;
     public bool _hasAimInput;
+    public bool _hasRotationInput;
 
     [Header("Camera Raycast")]
     public LayerMask _rayMask;
@@ -43,8 +44,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         UserMovementInput();
-        UserMouseLookInput();
-        CameraRaycast();
+        TopDownMouseInput();
     }
 
 
@@ -71,6 +71,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    #region Mouse Input
     public void UserMouseLookInput()
     {
         _mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity * Time.deltaTime;
@@ -92,12 +93,31 @@ public class InputManager : MonoBehaviour
         }
 
         _hasAimInput = Input.GetMouseButton(0);
+        _hasRotationInput = Input.GetMouseButton(1);
 
         if (Input.GetKeyDown(KeyCode.Z))
             ChangeCursorLock(true);
         if (Input.GetKeyDown(KeyCode.X))
             ChangeCursorLock(false);
     }
+
+
+    public void TopDownMouseInput()
+    {
+        _mouseX = Input.GetAxis("Mouse X") * Time.deltaTime;
+        _mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime;
+
+        _hasAimInput = Input.GetMouseButton(0);
+        _hasRotationInput = Input.GetMouseButton(1);
+
+        if (Input.GetKeyDown(KeyCode.Z))
+            ChangeCursorLock(true);
+        if (Input.GetKeyDown(KeyCode.X))
+            ChangeCursorLock(false);
+    }
+
+    #endregion
+
 
     public void ChangeCursorLock(bool val)
     {
