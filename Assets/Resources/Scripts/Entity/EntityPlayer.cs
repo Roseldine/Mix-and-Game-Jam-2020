@@ -6,7 +6,7 @@ public class EntityPlayer : Entity
     [Header("Sport Collisions")]
     public LayerMask _mask;
     public Transform _colliderPos;
-    public float _collisionRadius;
+    public float _collisionRadius = 1f;
 
 
     // Use this for initialization
@@ -58,11 +58,23 @@ public class EntityPlayer : Entity
 
     public void PlayerSportCollisions()
     {
-        var _colliders = Physics.OverlapSphere(_colliderPos.position, _collisionRadius);
-
-        if (_colliders != null && _colliders.Length > 0)
+        if (_colliderPos != null)
         {
+            var _colliders = Physics.OverlapSphere(_colliderPos.position, _collisionRadius);
 
+            if (_colliders != null && _colliders.Length > 0)
+            {
+
+            }
+        }
+    }
+
+    new private void OnDrawGizmos()
+    {
+        if (_colliderPos != null)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(_colliderPos.position, _collisionRadius);
         }
     }
 }

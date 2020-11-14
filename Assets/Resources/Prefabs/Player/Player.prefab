@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &776276318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776276319}
+  m_Layer: 8
+  m_Name: Collider Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &776276319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776276318}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2320153452346998469}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780866270
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,8 +292,8 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 16384
-      atime1: 65535
+      atime0: 9830
+      atime1: 42598
       atime2: 0
       atime3: 0
       atime4: 0
@@ -628,7 +658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320153452198359454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.25}
+  m_LocalPosition: {x: 1, y: 1, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2320153452381116226}
@@ -660,7 +690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2320153452288743855}
   m_Layer: 0
-  m_Name: Camera Pivot X
+  m_Name: Camera Pivot Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,6 +748,7 @@ Transform:
   - {fileID: 780866271}
   - {fileID: 1298571788}
   - {fileID: 1996197069}
+  - {fileID: 776276319}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -779,7 +810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityId: 0
   _entityType: 1
-  _entitySport: 0
+  _entitySport: 3
   _moveSpeed: 5
   _lookSpeed: 10
   _jumpForce: 30
@@ -815,10 +846,15 @@ MonoBehaviour:
     m_RotationOrder: 4
   _isGrounded: 0
   _rigidbody: {fileID: 2320153452346998471}
-  _groundDetector: {fileID: 2320153453336814489}
+  _groundDetector: {fileID: 780866271}
   _graphicContainer: {fileID: 2320153453336814489}
   _cameraPivotX: {fileID: 2320153452288743855}
   _cameraPivotY: {fileID: 2320153453581667902}
+  _mask:
+    serializedVersion: 2
+    m_Bits: 0
+  _colliderPos: {fileID: 776276319}
+  _collisionRadius: 0.75
 --- !u!114 &77481342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,12 +870,25 @@ MonoBehaviour:
   _entity: {fileID: 2320153452346998329}
   _ballPrefabs:
   - {fileID: 4379289090495741077, guid: 062199199fb5f6b4b852503a4d28785c, type: 3}
+  - {fileID: 4379289090495741077, guid: 89bcf145ca16d40428a0dcbfd817bfcf, type: 3}
+  - {fileID: 4379289090495741077, guid: d48b766047a056f47a2a35c3fc69e290, type: 3}
   _spawnPoints:
   - {fileID: 2320153453448333781}
   - {fileID: 2320153453514493127}
   - {fileID: 2320153452198359455}
-  _height: 10
+  _spawnPos: {fileID: 0}
+  _target: {fileID: 0}
+  _cooldown: 0.2
+  _heightMultiplier: 0.75
+  _maxBasketHeight: 10
   _gravity: -20
+  _basketHeight: 10
+  _footballLineLength: 5
+  _footballKickForce: 20
+  _baseballLineLength: 20
+  _baseballBatForce: 50
+  _canShoot: 1
+  _hasBall: 1
   _line: {fileID: 1996197070}
   _resolution: 30
 --- !u!1 &2320153452381116225
@@ -1057,7 +1106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320153453448333780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.25}
+  m_LocalPosition: {x: 1, y: 1, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2320153452381116226}
@@ -1104,7 +1153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320153453514493126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.25}
+  m_LocalPosition: {x: 0, y: 0.25, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2320153452381116226}
@@ -1136,7 +1185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2320153453581667902}
   m_Layer: 0
-  m_Name: Camera Pivot Y
+  m_Name: Camera Pivot X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
