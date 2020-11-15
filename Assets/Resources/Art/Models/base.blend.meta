@@ -37,13 +37,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Map
+    second: {fileID: 2100000, guid: 85f592e7f4089c245935c142aa86654b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Soccer_floor
     second: {fileID: 2100000, guid: 84aa7bd30fb4d8b49970156227f676fa, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Trophy
-    second: {fileID: 2100000, guid: 75cae9c4194cda84ca444f271ddb08a9, type: 2}
+    second: {fileID: 2100000, guid: fb370e62a8a115245aec74d91ca60ff6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
