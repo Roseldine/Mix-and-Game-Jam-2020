@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class Trophy : MonoBehaviour
 {
     public static Trophy Instance;
@@ -80,11 +82,21 @@ public class Trophy : MonoBehaviour
 
                 // some end method
                 _isDead = true;
+                StartCoroutine(End());
+
+
             }
 
             _healthbar._currentHealth = _health;
         }
     }
+
+    IEnumerator End()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 
     /// <summary>
     /// 0-damage, 1-destruction
