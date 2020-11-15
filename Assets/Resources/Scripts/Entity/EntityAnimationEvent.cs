@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class EntityAnimationEvent : MonoBehaviour
 {
-    public Entity _entity;
+    public EntityNew _entity;
 
-    public void Shoot(int id)
+    public void Shoot()
     {
-        Debug.Log(id);
-        _entity._ballLauncher.Shoot();
-    }
-
-    public void StopShooting()
-    {
-        _entity._isShooting = false;
+        _entity.Shoot();
     }
 }

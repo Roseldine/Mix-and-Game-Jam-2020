@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public IEntity.entitySport _ballSport;
     public float _lifeTime = 10f;
     public bool _destroy = true;
+    public bool _hasTriggered;
 
     private void OnEnable()
     {

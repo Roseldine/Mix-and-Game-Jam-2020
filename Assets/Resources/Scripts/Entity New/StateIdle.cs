@@ -20,12 +20,16 @@ public class StateIdle : EntityState
                 _stateMachine.ChangeEntityState(_stateMachine._states[2]);
 
             _entity.PlayerMovement();
+            _entity.CameraFollowPlayer(0);
         }
     }
 
     public override void UpdateState()
     {
-        _entity._animation.PlayAnimation(0);
+        if (_entity._isGrounded)
+            _entity._animation.PlayAnimation(0);
+        else
+            _entity._animation.PlayAnimation(2);
 
         if (_timeLimit > 0)
             _timeInState += Time.deltaTime;
