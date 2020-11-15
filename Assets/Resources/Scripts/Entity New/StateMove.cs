@@ -17,7 +17,7 @@ public class StateMove : EntityState
         if (_entity._entityType == IEntity.entityType.player)
         {
             if (InputManager.Instance._hasMovementInput == false)
-                _stateMachine.ChangeEntityState(_stateMachine._states[0]);
+                ChangeState(0);
 
             _entity.PlayerMovement();
             _entity.CameraFollowPlayer(1);
@@ -33,6 +33,8 @@ public class StateMove : EntityState
             _entity._animation.PlayAnimation(1);
         else
             _entity._animation.PlayAnimation(2);
+
+        UpdateEnemy();
     }
 
     public override bool ExitState()
@@ -40,5 +42,17 @@ public class StateMove : EntityState
         base.ExitState();
 
         return true;
+    }
+
+
+    void UpdateEnemy()
+    {
+        if (_entity._entityType == IEntity.entityType.enemy)
+        {
+            var _dist = Vector3.Distance(_entity._entityTransform.position, Trophy.Instance._trophyTransform.position);
+
+            if (_dist < _entity._trophyDistanceThreshold)
+                ChangeState(3);
+        }
     }
 }

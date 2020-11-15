@@ -13,6 +13,7 @@ public class EntityState : AbstractState
     public override bool EnterState()
     {
         base.EnterState();
+        _timeInState = 0;
 
         return true;
     }
@@ -39,4 +40,10 @@ public class EntityState : AbstractState
 
         return true;
     }
+
+
+    /// <summary>
+    /// [Tooltip("0-idle, 1-searching, 2-moving, 3-shoot, 4-death")]
+    /// </summary>
+    public void ChangeState(int id) => _stateMachine.ChangeState(_stateMachine._states[id]);
 }

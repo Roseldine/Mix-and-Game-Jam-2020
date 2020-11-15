@@ -8,8 +8,10 @@ public class StateIdle : EntityState
     {
         base.EnterState();
         _entity._animation.PlayAnimation(0);
+        if (_entity._entityType == IEntity.entityType.enemy)
+            _entity.StopAgent();
 
-        return true;
+            return true;
     }
 
     public override void HandleInput()
@@ -17,7 +19,7 @@ public class StateIdle : EntityState
         if (_entity._entityType == IEntity.entityType.player)
         {
             if (InputManager.Instance._hasMovementInput)
-                _stateMachine.ChangeEntityState(_stateMachine._states[2]);
+                ChangeState(2);
 
             _entity.PlayerMovement();
             _entity.CameraFollowPlayer(0);
@@ -33,6 +35,8 @@ public class StateIdle : EntityState
 
         if (_timeLimit > 0)
             _timeInState += Time.deltaTime;
+
+        UpdateEnemy();
     }
 
     public override bool ExitState()
@@ -40,5 +44,24 @@ public class StateIdle : EntityState
         base.ExitState();
 
         return true;
+    }
+
+
+    void UpdateEnemy()
+    {
+        if (_entity._entityType == IEntity.entityType.enemy)
+        {
+            if (_entity._isAttacking == false)
+            {
+                if (_timeInState > _timeLimit)
+                    ChangeState(1);
+            }
+
+            else
+            {
+                if (_timeInState > _entity._agentShootCooldown)
+                    ChangeState(3);
+            }
+        }
     }
 }
