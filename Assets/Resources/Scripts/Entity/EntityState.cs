@@ -29,8 +29,6 @@ public class EntityState : AbstractState
     {
         if (_timeLimit > 0)
             _timeInState += Time.deltaTime;
-
-        Debug.Log("Updating State");
     }
 
 
