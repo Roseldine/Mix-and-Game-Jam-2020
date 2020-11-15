@@ -144,7 +144,6 @@ public class EntityNew : MonoBehaviour
             Debug.Log("Audio");
             audioData = GetComponent<AudioSource>();
             audioData.Play(0);
-            Destroy(gameObject);
         }
     }
 
