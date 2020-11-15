@@ -31,9 +31,9 @@ public class InputManager : MonoBehaviour
     public LayerMask _rayMask;
     public Camera _camera;
     public Transform _camTransform;
-    public Transform _hitPreviewTransform;
+    public Transform _mousePickTransform;
     public float _rayLength;
-    public Vector3 _cameraRayHitPoint;
+    public Vector3 _mousePickPoint;
 
     private void Start()
     {
@@ -104,16 +104,24 @@ public class InputManager : MonoBehaviour
 
     public void TopDownMouseInput()
     {
+        if (Input.GetKeyDown(KeyCode.Z))
+            ChangeCursorLock(true);
+        if (Input.GetKeyDown(KeyCode.X))
+            ChangeCursorLock(false);
+
         _mouseX = Input.GetAxis("Mouse X") * Time.deltaTime;
         _mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime;
 
         _hasAimInput = Input.GetMouseButton(0);
         _hasRotationInput = Input.GetMouseButton(1);
 
-        if (Input.GetKeyDown(KeyCode.Z))
-            ChangeCursorLock(true);
-        if (Input.GetKeyDown(KeyCode.X))
-            ChangeCursorLock(false);
+        RaycastHit _hit;
+        Ray _ray = _camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(_ray, out _hit, _rayLength, _rayMask))
+        {
+            _mousePickPoint = _hit.point;
+            _mousePickTransform.position = _mousePickPoint;
+        }
     }
 
     #endregion
@@ -133,8 +141,8 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(_camTransform.position, _camTransform.forward, out _hit, _rayLength, _rayMask))
         {
-            _cameraRayHitPoint = _hit.point;
-            _hitPreviewTransform.position = _cameraRayHitPoint;
+            _mousePickPoint = _hit.point;
+            _mousePickTransform.position = _mousePickPoint;
         }
     }
 }

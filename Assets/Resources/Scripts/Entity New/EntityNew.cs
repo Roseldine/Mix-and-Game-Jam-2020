@@ -39,6 +39,31 @@ public class EntityNew : MonoBehaviour
     public Transform _graphic;
     public Animator _animator;
 
+    [Header("Shoot Forces")]
+    public float _basketForce;
+    public float _footballForce;
+    public float _baseballForce;
+
+    [Header("Line")]
+    public LineRenderer _line;
+    public LineRenderer _lineTest;
+    public float _straightLineLength = 4f;
+    public float _straightLineHeight = .25f;
+
+    [Header("Basketball Path Prediction")]
+    public AnimationCurve _basketCurve;
+    public float _basketCurveHeightMultiplier = 2f;
+    public int _basketArcIterations;
+    public float _basketArcMinHeight = 2f;
+    public float _basketArcMaxHeight = 5f;
+    public float _basketArcMaxDistance = 35f;
+    public float _basketTimeToDestination = 2f;
+    public bool _invert;
+    Vector3[] _path;
+
+    [Header("Baseball Path Prediction")]
+
+
     [Header("Player Camera")]
     public Transform _cameraPivot;
     public float _camSensitivity;
@@ -67,6 +92,10 @@ public class EntityNew : MonoBehaviour
 
         _canMove = true;
         _canShoot = true;
+
+        _line.useWorldSpace = true;
+        _lineTest.useWorldSpace = true;
+        SetSport((int)_entitySport);
     }
 
     #endregion
@@ -79,8 +108,13 @@ public class EntityNew : MonoBehaviour
 
     public void UpdateEntity()
     {
-        CameraFollowPlayer();
-        PlayerInput();
+        if (_entityType == IEntity.entityType.player)
+        {
+            PlayerAim();
+            CameraFollowPlayer();
+            PlayerInput();
+        }
+
         _stateMachine.UpdateStateMachine();
     }
 
@@ -131,6 +165,54 @@ public class EntityNew : MonoBehaviour
         }
     }
 
+    void PlayerAim()
+    {
+        var _aimDirection = (InputManager.Instance._mousePickTransform.position - _entityTransform.position).normalized;
+
+        var _ballSpawn = _ballSpawns[(int)_entitySport - 1];
+        var _initPos = _ballSpawn.position;
+        var _relativeDirection = _initPos + _aimDirection;
+
+        if (_entitySport == IEntity.entitySport.football || _entitySport == IEntity.entitySport.baseball)
+        {
+            var _height = Vector3.up * _straightLineHeight;
+            _line.SetPosition(0, _height + _initPos);
+            _line.SetPosition(1, _height + _relativeDirection * _straightLineLength);
+        }
+
+        else if (_entitySport == IEntity.entitySport.basketball)
+        {
+            _lineTest.SetPosition(0, _ballSpawn.position);
+            _lineTest.SetPosition(1, InputManager.Instance._mousePickTransform.position);
+
+            var _dir = (_lineTest.GetPosition(1) - _lineTest.GetPosition(0)).normalized;
+            var _distance = Vector3.Distance(_lineTest.GetPosition(0), _lineTest.GetPosition(1));
+            var _factor = _distance / _basketArcIterations;
+
+            if (_invert == false)
+                _basketCurveHeightMultiplier = _distance * _basketArcMaxHeight / _basketArcMaxDistance;
+            else
+                _basketCurveHeightMultiplier = _basketArcMaxHeight - (_distance * _basketArcMaxHeight / _basketArcMaxDistance);
+
+            _basketCurveHeightMultiplier = Mathf.Clamp(_basketCurveHeightMultiplier, _basketArcMinHeight, _basketArcMaxHeight);
+
+            _line.SetPosition(0, _lineTest.GetPosition(0));
+            for (int i = 1; i < _basketArcIterations; i++)
+            {
+                var _pos = _lineTest.GetPosition(0) + _dir * (_factor * i);
+                _path[i] = _pos;
+                _line.SetPosition(i, _pos + Vector3.up * _basketCurve.Evaluate(_factor * i / _distance) * _basketCurveHeightMultiplier);
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                int _ballId = (int)_entitySport - 1;
+                var _ball = Instantiate(_ballPrefabs[_ballId], _ballSpawns[_ballId].position, Quaternion.identity);
+                StartCoroutine(ShootBasketBall(_ball, _distance, _lineTest.GetPosition(1)));
+            }
+        }
+    }
+
 
     void CameraFollowPlayer()
     {
@@ -166,7 +248,7 @@ public class EntityNew : MonoBehaviour
 
         if (_entitySport == IEntity.entitySport.basketball)
         {
-            
+
         }
 
         else if (_entitySport == IEntity.entitySport.football)
@@ -187,6 +269,28 @@ public class EntityNew : MonoBehaviour
         _canShoot = true;
     }
 
+    IEnumerator ShootBasketBall(GameObject ball, float distance, Vector3 destination)
+    {
+        float t = 0;
+        float _duration = distance * _basketTimeToDestination / _basketArcMaxDistance;
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        var _localPath = _path;
+        Vector3 _initPos = ball.transform.position;
+        Vector3 _pos = _initPos;
+        float _multiplier = _basketCurveHeightMultiplier;
+
+        while (t < _duration)
+        {
+            _pos = Vector3.Lerp(_initPos, destination, t / _duration);
+            _pos.y = _basketCurve.Evaluate(Vector3.Distance(_pos, destination) / distance) * _multiplier;
+            ball.transform.position = _pos;
+            //rb.velocity = _pos;
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
+
     #endregion // shoot
 
 
@@ -198,6 +302,21 @@ public class EntityNew : MonoBehaviour
     public void SetSport(int id)
     {
         _entitySport = (IEntity.entitySport)id;
+
+        if (_entitySport == IEntity.entitySport.none)
+            _line.positionCount = 0;
+
+        else if (_entitySport == IEntity.entitySport.basketball)
+        {
+            _path = new Vector3[_basketArcIterations];
+            _line.positionCount = _basketArcIterations;
+        }
+
+        else if (_entitySport == IEntity.entitySport.football)
+            _line.positionCount = 2;
+
+        else if (_entitySport == IEntity.entitySport.baseball)
+            _line.positionCount = 2;
     }
 
 

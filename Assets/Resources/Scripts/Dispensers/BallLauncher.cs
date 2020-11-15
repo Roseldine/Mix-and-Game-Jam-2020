@@ -55,7 +55,7 @@ public class BallLauncher : MonoBehaviour
 	#region Shoot
 	public void Shoot()
 	{
-		_target = InputManager.Instance._hitPreviewTransform;
+		_target = InputManager.Instance._mousePickTransform;
 
 		if (_entity._entitySport == IEntity.entitySport.basketball)
 		{
@@ -159,7 +159,7 @@ public class BallLauncher : MonoBehaviour
 		if (_entity._entitySport == IEntity.entitySport.baseball)
 		{
 			_line.SetPosition(0, _spawnPos.position);
-			var _targetPos = _spawnPos.position + (InputManager.Instance._hitPreviewTransform.position - _spawnPos.position).normalized * _baseballLineLength;
+			var _targetPos = _spawnPos.position + (InputManager.Instance._mousePickTransform.position - _spawnPos.position).normalized * _baseballLineLength;
 			_line.SetPosition(1, _targetPos);
 		}
 	}
@@ -167,7 +167,7 @@ public class BallLauncher : MonoBehaviour
 
 	void GetSpawnPos()
 	{
-		_target = InputManager.Instance._hitPreviewTransform;
+		_target = InputManager.Instance._mousePickTransform;
 
 		if (_entity._entitySport == IEntity.entitySport.basketball)
 		{
