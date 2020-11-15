@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/StartMenu.unity
     guid: 9381bca774d4f0241a2dafd298d6ea60
-  - enabled: 0
+  - enabled: 1
     path: Assets/Resources/Scenes/Zeca.unity
     guid: f25ebc94981209c41a12c3ab5a9e3c78
   m_configObjects: {}
