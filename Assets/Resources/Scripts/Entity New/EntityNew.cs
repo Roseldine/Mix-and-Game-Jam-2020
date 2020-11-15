@@ -94,11 +94,14 @@ public class EntityNew : MonoBehaviour
     public float _camSensitivity;
 
 
+    AudioSource audioData;
+
     #region Initialization
 
     private void Start()
     {
         StartVariables();
+        
     }
 
 
@@ -135,6 +138,14 @@ public class EntityNew : MonoBehaviour
     private void Update()
     {
         UpdateEntity();
+
+        if (_isDead == true)
+        {
+            Debug.Log("Audio");
+            audioData = GetComponent<AudioSource>();
+            audioData.Play(0);
+            Destroy(gameObject);
+        }
     }
 
     public void UpdateEntity()
@@ -143,6 +154,7 @@ public class EntityNew : MonoBehaviour
         {
             PlayerAim();
             PlayerInput();
+            
         }
 
         Gravity();
