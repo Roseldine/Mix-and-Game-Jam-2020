@@ -10,7 +10,6 @@ public class EntityNew : MonoBehaviour
 
     [Header("Dependencies")]
     public Rigidbody _rigidbody;
-    public UnityEngine.AI.NavMeshAgent _agent;
     public Transform _entityTransform;
     public EntityNewStateMachine _stateMachine;
     public EntityAnimation _animation;
@@ -27,7 +26,7 @@ public class EntityNew : MonoBehaviour
     public bool _canMove = true;
     float _internalMoveGravity;
 
-    [Header("Groun Detection")]
+    [Header("Ground Detection")]
     public Transform _groundDetector;
     public LayerMask _groundMask;
     [Range(0, .5f)] public float _detectorRadius = .15f;
@@ -41,6 +40,13 @@ public class EntityNew : MonoBehaviour
     [Tooltip("0-basket, 1-footbal, 2-baseball")]
     public float[] _shootCooldowns;
     public bool _canShoot = true;
+
+    [Header("Enemy AI")]
+    public UnityEngine.AI.NavMeshAgent _agent;
+    public float _trophyDistanceThreshold;
+    public float _agentShootCooldown;
+    public bool _isAttacking;
+    public bool _hasPath;
 
     [Header("Graphics")]
     public Transform _graphicContainer;
@@ -66,12 +72,12 @@ public class EntityNew : MonoBehaviour
     [Header("Basketball Path Prediction")]
     public Rigidbody _basketSpawn;
     public float _basketHeight = 10f;
-    [Range(0, 30)] public float _maxBasketHeight = 10f;
+    [Range(0, 100)] public float _maxBasketHeight = 10f;
 
     [Header("Baseball Path Prediction")]
     public Rigidbody _baseballSpawn;
     public float _baseballHeight = 10f;
-    [Range(0, 20)] public float _maxBaseballHeight = 10f;
+    [Range(0, 100)] public float _maxBaseballHeight = 2f;
 
     Vector3[] _path;
     Transform _target;
@@ -113,6 +119,14 @@ public class EntityNew : MonoBehaviour
         _line.useWorldSpace = true;
         _lineTest.useWorldSpace = true;
         SetSport((int)_entitySport);
+
+        if (_entityType == IEntity.entityType.enemy)
+        {
+            if (_agent == null)
+                _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+            _agent.speed = _moveSpeed;
+            _target = Trophy.Instance._enemyTarget;
+        }
     }
 
     #endregion
@@ -341,7 +355,7 @@ public class EntityNew : MonoBehaviour
     /// <summary>
     /// 0-basket, 1-baseball
     /// </summary>
-    void DrawPath(int id, Rigidbody rb)
+    public void DrawPath(int id, Rigidbody rb)
     {
         LaunchData launchData = CalculateLaunchData(rb, _basketHeight);
 
@@ -454,6 +468,35 @@ public class EntityNew : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(_groundDetector.position, _detectorRadius);
+        }
+    }
+
+    #endregion
+
+
+    #region AI
+
+    public void SetAgentPath(Vector3 destination)
+    {
+        if (_agent.enabled == false)
+        {
+            _agent.enabled = true;
+            _agent.isStopped = false;
+            _agent.SetDestination(destination);
+            _hasPath = true;
+        }
+    }
+
+
+    public void StopAgent()
+    {
+        if (_agent.enabled)
+        {
+            _agent.isStopped = true;
+            _agent.ResetPath();
+            _agent.velocity = Vector3.zero;
+            _agent.enabled = false;
+            _hasPath = false;
         }
     }
 
