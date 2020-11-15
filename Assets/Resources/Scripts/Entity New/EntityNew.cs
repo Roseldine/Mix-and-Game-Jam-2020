@@ -462,6 +462,32 @@ public class EntityNew : MonoBehaviour
     }
 
 
+    public void TakeDamage(int ammount)
+    {
+        if (_health > 0)
+        {
+            _health -= ammount;
+            _health = Mathf.Clamp(_health, 0, _maxHealth);
+            //PlayAudio(0);
+
+            if (_health <= 0)
+            {
+                // some end method
+                _isDead = true;
+            }
+        }
+    }
+
+
+    public void PlayAudio()
+    {
+        //if (_source != null && _clip != null)
+        //{
+        //    _source.PlayOneShot(_clip, _volume);
+        //}
+    }
+
+
     private void OnDrawGizmos()
     {
         if (_groundDetector != null)

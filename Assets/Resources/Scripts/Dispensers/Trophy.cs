@@ -9,9 +9,15 @@ public class Trophy : MonoBehaviour
     [Header("Health")]
     public Transform _trophyTransform;
     public Transform _enemyTarget;
+    public HealthBar _healthbar;
     public int _maxHealth;
     public int _health;
     public bool _isDead;
+
+    [Header("Collisions")]
+    public LayerMask _detectionMask;
+    public Transform _triggerPos;
+    public float _triggerRadius;
 
     [Header("Particles")]
     public GameObject _damageParticle;
@@ -28,7 +34,34 @@ public class Trophy : MonoBehaviour
     {
         Instance = this;
         _trophyTransform = transform;
+        _healthbar._maxHealth = _maxHealth;
+        _healthbar._currentHealth = _maxHealth;
+        _health = _maxHealth;
     }
+
+    private void Update()
+    {
+        CheckCollisions();
+    }
+
+    public void CheckCollisions()
+    {
+        var _collisions = Physics.OverlapSphere(_triggerPos.position, _triggerRadius, _detectionMask);
+
+        if (_collisions != null && _collisions.Length > 0)
+        {
+            for (int i = 0; i < _collisions.Length; i++)
+            {
+                var _ball = _collisions[i].GetComponent<Ball>();
+                if (_ball._hasTriggered == false)
+                {
+                    TakeDamage(1);
+                    _ball._hasTriggered = true;
+                }
+            }
+        }
+    }
+
 
     public void TakeDamage(int ammount)
     {
@@ -48,6 +81,8 @@ public class Trophy : MonoBehaviour
                 // some end method
                 _isDead = true;
             }
+
+            _healthbar._currentHealth = _health;
         }
     }
 
@@ -63,6 +98,15 @@ public class Trophy : MonoBehaviour
                 _source.PlayOneShot(_damageClip, _volume);
             if (id == 1)
                 _source.PlayOneShot(_destructionClip, _volume);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_triggerPos != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_triggerPos.position, _triggerRadius);
         }
     }
 }
