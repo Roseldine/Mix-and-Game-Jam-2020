@@ -310,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8641679839005599472}
+  - component: {fileID: 1179832161}
   m_Layer: 0
   m_Name: Spawn - Baseball
   m_TagString: Untagged
@@ -331,38 +332,22 @@ Transform:
   m_Father: {fileID: 8641679838903079316}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8641679839225105435
-Animator:
-  serializedVersion: 3
+--- !u!54 &1179832161
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8875473186849288519}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e1b43cdb762a2744691533d718d30b71, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8641679839225105434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8875473186849288519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1226132eab023142a869c1663fc5f1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _entity: {fileID: 8641679839821994792}
+  m_GameObject: {fileID: 8641679839005599473}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8641679839286159364
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,52 +772,15 @@ MonoBehaviour:
   _lineTest: {fileID: 8641679838475599013}
   _straightLineLength: 4
   _straightLineHeight: 0.25
-  _basketSpawn: {fileID: 8641679839555070950}
-  _maxBasketHeight: 5
   _gravity: -25
-  _basketHeight: 10
-  _heightMultiplier: 0.75
   _resolution: 32
-  _basketCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.7770271
-      outSlope: 3.7770271
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.05142857
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -3.0040565
-      outSlope: -3.0040565
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.05681814
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _basketCurveHeightMultiplier: 4
-  _basketArcIterations: 16
-  _basketArcMinHeight: 2
-  _basketArcMaxHeight: 7
-  _basketArcMaxDistance: 35
-  _basketTimeToDestination: 2
-  _invert: 0
+  _heightMultiplier: 0.75
+  _basketSpawn: {fileID: 8641679839555070950}
+  _basketHeight: 5
+  _maxBasketHeight: 5
+  _baseballSpawn: {fileID: 1179832161}
+  _baseballHeight: 1
+  _maxBaseballHeight: 1
   _cameraPivot: {fileID: 0}
   _camTargetMove: {fileID: 8641679838434331689}
   _camTargetIdle: {fileID: 8641679838819184729}
@@ -1138,6 +1086,38 @@ MonoBehaviour:
   _stateId: 3
   _timeInState: 0
   _timeLimit: 0
+--- !u!95 &8641679839225105435
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875473186849288519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1b43cdb762a2744691533d718d30b71, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8641679839225105434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875473186849288519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1226132eab023142a869c1663fc5f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 8641679839821994792}
 --- !u!1001 &8641679839225105430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1922,15 +1902,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8798f3bde2c3bda42842dfcf2983c76d, type: 3}
---- !u!4 &8099674977014885373 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8798f3bde2c3bda42842dfcf2983c76d,
-    type: 3}
-  m_PrefabInstance: {fileID: 8641679839225105430}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8875473186849288519 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8798f3bde2c3bda42842dfcf2983c76d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8641679839225105430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8099674977014885373 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8798f3bde2c3bda42842dfcf2983c76d,
     type: 3}
   m_PrefabInstance: {fileID: 8641679839225105430}
   m_PrefabAsset: {fileID: 0}
