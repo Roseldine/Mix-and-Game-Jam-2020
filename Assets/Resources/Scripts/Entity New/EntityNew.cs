@@ -145,7 +145,8 @@ public class EntityNew : MonoBehaviour
                 var _velocity = _cameraPivot.localRotation * InputManager.Instance._direction * _moveSpeed;
                 _velocity.y += _gravity * Time.deltaTime * _internalMoveGravity;
                 _rigidbody.velocity = _velocity;
-                SmoothLookAt(_graphicContainer, InputManager.Instance._direction, _lookSpeed);
+
+                SmoothLookAt(_graphicContainer, _cameraPivot.localRotation * InputManager.Instance._direction, _lookSpeed);
             }
 
             else
