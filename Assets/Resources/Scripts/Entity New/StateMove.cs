@@ -19,8 +19,8 @@ public class StateMove : EntityState
             if (InputManager.Instance._hasMovementInput == false)
                 _stateMachine.ChangeEntityState(_stateMachine._states[0]);
 
-            _entity._animation.PlayAnimation(1);
             _entity.PlayerMovement();
+            _entity.CameraFollowPlayer(1);
         }
     }
 
@@ -28,6 +28,11 @@ public class StateMove : EntityState
     {
         if (_timeLimit > 0)
             _timeInState += Time.deltaTime;
+
+        if (_entity._isGrounded)
+            _entity._animation.PlayAnimation(1);
+        else
+            _entity._animation.PlayAnimation(2);
     }
 
     public override bool ExitState()
