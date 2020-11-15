@@ -6,7 +6,8 @@ public class StateDeath : EntityState
     public override bool EnterState()
     {
         base.EnterState();
-
+        _entity.PlayAudio(1);
+        _entity._animation.PlayAnimation(6);
         return true;
     }
 
@@ -17,8 +18,13 @@ public class StateDeath : EntityState
 
     public override void UpdateState()
     {
-        if (_timeLimit > 0)
-            _timeInState += Time.deltaTime;
+        base.UpdateState();
+
+        if (_timeInState > _timeLimit)
+        {
+            // start particles
+            Destroy(_entity.gameObject);
+        }
     }
 
     public override bool ExitState()

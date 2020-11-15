@@ -93,8 +93,11 @@ public class EntityNew : MonoBehaviour
     [Range(0, 50)] public float _camIdleFollowSpeed = 20f;
     public float _camSensitivity;
 
-
-    AudioSource audioData;
+    [Header("Audio")]
+    public AudioSource audioData;
+    public AudioClip _clipDamage;
+    public AudioClip _clipDeath;
+    public float _volume = .75f;
 
     #region Initialization
 
@@ -130,6 +133,8 @@ public class EntityNew : MonoBehaviour
             _agent.speed = _moveSpeed;
             _target = Trophy.Instance._enemyTarget;
         }
+
+        _health = _maxHealth;
     }
 
     #endregion
@@ -138,13 +143,6 @@ public class EntityNew : MonoBehaviour
     private void Update()
     {
         UpdateEntity();
-
-        if (_isDead == true)
-        {
-            Debug.Log("Audio");
-            audioData = GetComponent<AudioSource>();
-            audioData.Play(0);
-        }
     }
 
     public void UpdateEntity()
@@ -469,6 +467,42 @@ public class EntityNew : MonoBehaviour
             {
                 _isGrounded = false;
             }
+        }
+    }
+
+
+    public void TakeDamage(int ammount)
+    {
+        if (_health > 0)
+        {
+            Debug.Log("Hit Enemy: " + gameObject);
+            _health -= ammount;
+            _health = Mathf.Clamp(_health, 0, _maxHealth);
+            PlayAudio(0);
+
+            if (_health <= 0)
+            {
+                // some end method
+                PlayAudio(1);
+                _stateMachine.ChangeState(_stateMachine._states[4]);
+                _isDead = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 0-damage, 1-death
+    /// </summary>
+    /// <param name="id"></param>
+    public void PlayAudio(int id)
+    {
+        if (audioData != null && _clipDamage != null && _clipDeath != null)
+        {
+            if (id == 0)
+                audioData.PlayOneShot(_clipDamage, _volume);
+
+            if (id == 1)
+                audioData.PlayOneShot(_clipDeath, _volume);
         }
     }
 

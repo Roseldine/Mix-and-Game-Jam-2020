@@ -24,6 +24,9 @@ public class Target : MonoBehaviour
     public AudioClip _clip;
     public float _volume = .75f;
 
+    [Header("Is related to entity")]
+    public EntityNew _entity;
+
     private void Start()
     {
         if (_source == null)
@@ -54,6 +57,9 @@ public class Target : MonoBehaviour
 
                 if (_ball._ballSport == _sportDetect && _ball._hasTriggered == false)
                 {
+                    if (_entity != null)
+                        _entity.TakeDamage(1);
+
                     // ball hit add some code here
                     if (_triggerParticle != null)
                         Instantiate(_triggerParticle, _targetTrigger.position, Quaternion.identity);

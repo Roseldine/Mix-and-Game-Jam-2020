@@ -7,10 +7,10 @@ public class HealthBar : MonoBehaviour
     public Image circleBar;
     public Image extraBar;
 
-    public float currentHealth = 0;
-    public float maxHealth = 100;
-    public float circlePercentage = 0.3f;
-    public const float circleFillAmount = 0.75f;
+    public float _currentHealth = 0;
+    public float _maxHealth = 100;
+    public float _circlePercentage = 0.75f;
+    public const float _circleFillAmount = 0.75f;
 
 
     void Start()
@@ -27,18 +27,18 @@ public class HealthBar : MonoBehaviour
 
     void CircleFill()
     {
-        float healthPercentage = currentHealth / maxHealth;
-        float circleFill = healthPercentage / circlePercentage;
-        circleFill *= circleFillAmount;
+        float healthPercentage = _currentHealth / _maxHealth;
+        float circleFill = healthPercentage / _circlePercentage;
+        circleFill *= _circleFillAmount;
         circleBar.fillAmount = healthPercentage;
     }
 
     void ExtraFill()
     {
-        float circleAmount = circlePercentage * maxHealth;
+        float circleAmount = _circlePercentage * _maxHealth;
 
-        float extraHealth = currentHealth - circleAmount;
-        float extraTotalHealth = maxHealth - circleAmount;
+        float extraHealth = _currentHealth - circleAmount;
+        float extraTotalHealth = _maxHealth - circleAmount;
 
         float extraFill= extraHealth/extraTotalHealth;
         extraBar.fillAmount = extraFill;
