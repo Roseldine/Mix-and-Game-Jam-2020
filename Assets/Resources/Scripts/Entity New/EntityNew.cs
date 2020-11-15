@@ -58,22 +58,21 @@ public class EntityNew : MonoBehaviour
     public float _straightLineLength = 4f;
     public float _straightLineHeight = .25f;
 
+    [Header("Arc Commons")]
+    public float _gravity = -25f;
+    public int _resolution = 32;
+    [Range(0, 2)] public float _heightMultiplier = .75f;
+
     [Header("Basketball Path Prediction")]
     public Rigidbody _basketSpawn;
-    [Range(0, 30)] public float _maxBasketHeight = 10f;
-    public float _gravity = -25f;
     public float _basketHeight = 10f;
-    [Range(0, 2)] public float _heightMultiplier = .75f;
-    public int _resolution;
+    [Range(0, 30)] public float _maxBasketHeight = 10f;
 
-    public AnimationCurve _basketCurve;
-    public float _basketCurveHeightMultiplier = 2f;
-    public int _basketArcIterations;
-    public float _basketArcMinHeight = 2f;
-    public float _basketArcMaxHeight = 5f;
-    public float _basketArcMaxDistance = 35f;
-    public float _basketTimeToDestination = 2f;
-    public bool _invert;
+    [Header("Baseball Path Prediction")]
+    public Rigidbody _baseballSpawn;
+    public float _baseballHeight = 10f;
+    [Range(0, 20)] public float _maxBaseballHeight = 10f;
+
     Vector3[] _path;
     Transform _target;
 
@@ -188,13 +187,9 @@ public class EntityNew : MonoBehaviour
     void PlayerAim()
     {
         _target = InputManager.Instance._mousePickTransform;
-        var _aimDirection = (InputManager.Instance._mousePickTransform.position - _entityTransform.position).normalized;
-
         var _ballSpawn = _ballSpawns[(int)_entitySport - 1];
-        var _initPos = _ballSpawn.position;
-        var _relativeDirection = _initPos + _aimDirection;
 
-        if (_entitySport == IEntity.entitySport.football || _entitySport == IEntity.entitySport.baseball)
+        if (_entitySport == IEntity.entitySport.football)
         {
             if (_line.positionCount != 2)
                 _line.positionCount = 2;
@@ -210,7 +205,7 @@ public class EntityNew : MonoBehaviour
 
         else if (_entitySport == IEntity.entitySport.basketball)
         {
-            DrawPath(_basketSpawn);
+            DrawPath(0, _basketSpawn);
 
             #region Old interesting code
             /*
@@ -244,6 +239,11 @@ public class EntityNew : MonoBehaviour
             }
             */
             #endregion
+        }
+
+        else if (_entitySport == IEntity.entitySport.baseball)
+        {
+            DrawPath(1, _baseballSpawn);
         }
     }
 
@@ -287,7 +287,10 @@ public class EntityNew : MonoBehaviour
             _ballRb.AddForce(_force * _footballForce, ForceMode.Impulse);
 
         else if (_entitySport == IEntity.entitySport.baseball)
-            _ballRb.AddForce(_force * _baseballForce, ForceMode.Impulse);
+        {
+            //_ballRb.AddForce(_force * _baseballForce, ForceMode.Impulse);
+            Launch(_ballRb, _baseballHeight);
+        }
     }
 
     IEnumerator ShootCooldown(float cooldown)
@@ -333,12 +336,31 @@ public class EntityNew : MonoBehaviour
         }
     }
 
-    void DrawPath(Rigidbody rb)
+
+    /// <summary>
+    /// 0-basket, 1-baseball
+    /// </summary>
+    void DrawPath(int id, Rigidbody rb)
     {
-        var _dist = Vector3.Distance(_target.position, transform.position);
-        _basketHeight = _dist * _heightMultiplier;
-        _basketHeight = Mathf.Clamp(_basketHeight, 0, _maxBasketHeight);
         LaunchData launchData = CalculateLaunchData(rb, _basketHeight);
+
+        if (id == 0)
+        {
+            var _dist = Vector3.Distance(_target.position, transform.position);
+            _basketHeight = _dist * _heightMultiplier;
+            _basketHeight = Mathf.Clamp(_basketHeight, 0, _maxBasketHeight);
+            launchData = CalculateLaunchData(rb, _basketHeight);
+        }
+        
+        else if (id == 1)
+        {
+            var _dist = Vector3.Distance(_target.position, transform.position);
+            _baseballHeight = _dist * _heightMultiplier;
+            _baseballHeight = Mathf.Clamp(_baseballHeight, 0, _maxBaseballHeight);
+            launchData = CalculateLaunchData(rb, _baseballHeight);
+        }        
+
+
         Vector3 previousDrawPoint = rb.position;
         _path = new Vector3[_resolution];
 
@@ -377,8 +399,8 @@ public class EntityNew : MonoBehaviour
 
         else if (_entitySport == IEntity.entitySport.basketball)
         {
-            _path = new Vector3[_basketArcIterations];
-            _line.positionCount = _basketArcIterations;
+            _path = new Vector3[_resolution];
+            _line.positionCount = _resolution;
         }
 
         else if (_entitySport == IEntity.entitySport.football)
